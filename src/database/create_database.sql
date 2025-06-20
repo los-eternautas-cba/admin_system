@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
     id_usuario INTEGER PRIMARY KEY AUTOINCREMENT,
     nombre_usuario TEXT NOT NULL UNIQUE,
     email TEXT NOT NULL UNIQUE,
-    contraseña_hash TEXT NOT NULL,
+    contrasena_hash TEXT NOT NULL,
     fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
     id_rol INTEGER NOT NULL,
     FOREIGN KEY (id_rol) REFERENCES roles(id_rol) ON DELETE RESTRICT ON UPDATE CASCADE

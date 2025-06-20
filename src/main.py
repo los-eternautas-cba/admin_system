@@ -4,7 +4,7 @@ from .modulo1.services import UserManager
 from .modulo1.models import Usuario
 from .utils import limpiar_consola, validar_contraseña
 
-DB_PATH = 'database/usuarios.db'
+DB_PATH = 'src/database/usuarios.db' # SE CORRIGE ERROR DE RUTAS 
 SCRIPT_PATH = 'src/database/create_database.sql'
 
 class Application:

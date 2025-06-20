@@ -19,7 +19,7 @@ class UserManager:
         id_rol_estandar = self.db_manager.ejecutar_consulta("SELECT id_rol FROM roles WHERE nombre_rol = 'estandar'")[0]['id_rol']
         
         hash_contraseña = hashear_contraseña(contraseña)
-        query = "INSERT INTO usuarios (nombre_usuario, email, contraseña_hash, id_rol) VALUES (?, ?, ?, ?)"
+        query = "INSERT INTO usuarios (nombre_usuario, email, contrasena_hash, id_rol) VALUES (?, ?, ?, ?)"
         params = (nombre_usuario, email, hash_contraseña, id_rol_estandar)
         
         if self.db_manager.ejecutar_modificacion(query, params):
@@ -30,7 +30,7 @@ class UserManager:
     def iniciar_sesion(self, nombre_usuario: str, contraseña: str) -> tuple[Usuario | None, str]:
         """Valida las credenciales e inicia sesión."""
         query = """
-            SELECT u.id_usuario, u.nombre_usuario, u.contraseña_hash, r.nombre_rol
+            SELECT u.id_usuario, u.nombre_usuario, u.contrasena_hash, r.nombre_rol
             FROM usuarios u
             JOIN roles r ON u.id_rol = r.id_rol
             WHERE u.nombre_usuario = ?
@@ -41,7 +41,7 @@ class UserManager:
             return None, "Usuario o contraseña incorrectos."
         
         usuario_db = resultado[0]
-        if verificar_contraseña(contraseña, usuario_db['contraseña_hash']):
+        if verificar_contraseña(contraseña, usuario_db['contrasena_hash']):
             usuario_logueado = Usuario(
                 id_usuario=usuario_db['id_usuario'],
                 nombre_usuario=usuario_db['nombre_usuario'],
